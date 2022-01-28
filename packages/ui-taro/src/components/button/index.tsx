@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from "classnames";
+import cls from "classnames";
 import { Button, ButtonProps } from '@tarojs/components';
 import { mergeProps } from '../../utils';
 
@@ -10,17 +10,20 @@ export interface TButtonProps extends ButtonProps {
   fill: 'solid' | 'outline' | 'none';
 }
 
-const classPrefix = `t-button`
+const classPrefix = 't-button'
 
 const Index: React.FC<TButtonProps> = (p) => {
   const props = mergeProps({
+    block: false,
+    loading: false,
     shape: 'default',
+    fill: 'none',
   }, p)
 
   return (
     <Button
       className={
-        classNames(
+        cls(
           classPrefix,
           {
             [`${classPrefix}-block`]: props.block,
