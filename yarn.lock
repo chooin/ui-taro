@@ -1063,6 +1063,11 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@ebay/nice-modal-react@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmmirror.com/@ebay/nice-modal-react/download/@ebay/nice-modal-react-1.2.0.tgz#c7c3dc6e14d7a95c9bf29860aa69272adb008fa3"
+  integrity sha512-3FY4uPpmrJP6Zfg1yiR89mH0qOcFFp9qFtCNoN720aeMFLnf590zoWqL850yQj87mcofzluHlfjhU+CGfVqcPA==
+
 "@gar/promisify@^1.0.1":
   version "1.1.2"
   resolved "https://registry.nlark.com/@gar/promisify/download/@gar/promisify-1.1.2.tgz?cache=0&sync_timestamp=1630000133403&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40gar%2Fpromisify%2Fdownload%2F%40gar%2Fpromisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
@@ -1474,7 +1479,7 @@
     "@tarojs/taro" "3.4.1"
     loader-utils "^1.2.3"
 
-"@tarojs/taro@3.4.1":
+"@tarojs/taro@3.4.1", "@tarojs/taro@^3.4.1":
   version "3.4.1"
   resolved "https://registry.npmmirror.com/@tarojs/taro/download/@tarojs/taro-3.4.1.tgz#05b34cfdb363216985c428cc84b2067c0ec7dec0"
   integrity sha512-10ubTVi4cAgFws1mMJPOgDTWyW+eeMTVwJkB0EfLe3nsZ/tK0w2+ulwMh5At60Tj4mWGzrSF6U4SWZRY4H5Ldw==

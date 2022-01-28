@@ -1,15 +1,28 @@
+.t-button--web-normalize {
+  &::after {
+    display: none;
+  }
+}
+
+.t-button--weapp-normalize {
+  &::after {
+    display: none;
+  }
+}
+
 .t-button,
 .t-button:hover {
   position: relative;
   background: #ccc;
   text-align: center;
-  font-size: 16px;
+  font-size: 32px;
   padding: 10px 15px;
   cursor: pointer;
   text-decoration: none;
   border: none;
   user-select: none;
   box-sizing: border-box;
+  display: inline-block;
 }
 
 .t-button--block {
@@ -17,5 +30,4 @@
 }
 
 .t-button--small {
-  
 }
