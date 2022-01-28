@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "taro-mobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:chooin/taro-mobile.git",
+  "author": "Devin <chooin@126.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn workspace taro-mobile build"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
