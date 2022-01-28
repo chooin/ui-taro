@@ -2,7 +2,6 @@
 .t-button:hover {
   position: relative;
   background: #ccc;
-  border-radius: 3px;
   text-align: center;
   font-size: 16px;
   padding: 10px 15px;
@@ -11,4 +10,12 @@
   border: none;
   user-select: none;
   box-sizing: border-box;
+}
+
+.t-button--block {
+  display: block;
+}
+
+.t-button--small {
+  
 }
