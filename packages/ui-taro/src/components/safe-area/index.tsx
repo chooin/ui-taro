@@ -21,7 +21,7 @@ const Index: React.FC<Props> = (props) => {
     }, () => {
       return <View className={cls(`${classPrefix}-bottom`,)} />
     })
-    .otherwise(() => <></>)
+    .otherwise(() => <></>);
 };
 
 export default Index;
