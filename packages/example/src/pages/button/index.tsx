@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import {Button, withProvider} from '@/../ui-taro/src/index';
+import { Button } from '@/../ui-taro/src/index';
 import './index.scss'
 
 const Index: React.FC = () => {
@@ -15,4 +15,4 @@ const Index: React.FC = () => {
   )
 }
 
-export default withProvider(Index);
+export default Index;

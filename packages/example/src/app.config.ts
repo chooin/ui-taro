@@ -1,6 +1,7 @@
 export default defineAppConfig({
   pages: [
-    'pages/button/index'
+    'pages/button/index',
+    'pages/safe-area/index'
   ],
   window: {
     backgroundTextStyle: 'light',
