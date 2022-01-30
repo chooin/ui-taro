@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Taro from '@tarojs/taro';
-import cls from "classnames";
+import cls from 'classnames';
 import { Button, ButtonProps } from '@tarojs/components';
 import { mergeProps } from '../../utils';
 

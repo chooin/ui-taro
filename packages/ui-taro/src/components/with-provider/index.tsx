@@ -3,7 +3,7 @@ import { Provider } from '@ebay/nice-modal-react';
 
 interface Props {}
 
-export default function <P extends Props>(
+function withProvider<P extends Props>(
   Component: React.FC<P>,
 ) {
   return (props: P) => {
@@ -15,3 +15,4 @@ export default function <P extends Props>(
   };
 }
 
+export default withProvider;
