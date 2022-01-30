@@ -9,6 +9,7 @@ export interface TButtonProps extends ButtonProps {
   loading?: boolean;
   shape?: 'default' | 'rounded' | 'rectangular';
   fill?: 'solid' | 'outline' | 'none';
+  color?: 'default' | 'primary' | 'success' | 'warning' | 'danger';
 }
 
 const classPrefix = 't-button'
@@ -18,6 +19,7 @@ const Index: React.FC<TButtonProps> = (p) => {
     block: false,
     loading: false,
     shape: 'default',
+    color: 'default',
     fill: 'none',
   }, p)
 
@@ -26,15 +28,17 @@ const Index: React.FC<TButtonProps> = (p) => {
       className={
         cls(
           classPrefix,
-          `${classPrefix}--${props.fill}`,
+          `${classPrefix}-normalize`,
+          `${classPrefix}--${props.color}`,
+          `${classPrefix}--fill-${props.fill}`,
+          `${classPrefix}--shape-${props.shape}`,
           {
             [`${classPrefix}--block`]: props.block,
-            [`${classPrefix}--web-normalize`]: Taro.ENV_TYPE.WEB === Taro.getEnv(),
-            [`${classPrefix}--weapp-normalize`]: Taro.ENV_TYPE.WEAPP === Taro.getEnv(),
           },
         )
       }
-      {...props}>{props.children}</Button>
+      {...props}
+      loading={false}>{props.children}</Button>
   )
 }
 

@@ -1,10 +1,6 @@
-.t-button--web-normalize {
-  &::after {
-    display: none;
-  }
-}
+@import "../../scss/variables.scss";
 
-.t-button--weapp-normalize {
+.t-button--normalize {
   &::after {
     display: none;
   }
@@ -18,11 +14,12 @@
   font-size: 32px;
   padding: 10px 15px;
   cursor: pointer;
-  text-decoration: none;
   border: none;
   user-select: none;
+  text-decoration: none;
   box-sizing: border-box;
   display: inline-block;
+  transition: all 0.3s;
 }
 
 .t-button--block {
@@ -30,4 +27,33 @@
 }
 
 .t-button--small {
+
+}
+
+.t-button--primary,
+.t-button--primary:hover, {
+  background: $primary !important;
+  color: #fff !important;
+}
+
+.t-button--success,
+.t-button--success:hover, {
+  background: $success !important;
+  color: #fff !important;
+}
+
+.t-button--warning,
+.t-button--warning:hover, {
+  background: $warning !important;
+  color: #fff !important;
+}
+
+.t-button--danger,
+.t-button--danger:hover, {
+  background: $danger !important;
+  color: #fff !important;
+}
+
+.t-button:active {
+  opacity: 0.95;
 }
