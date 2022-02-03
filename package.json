@@ -7,7 +7,8 @@
   "author": "Devin <chooin@126.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn workspace example dev:h5",
+    "dev:h5": "yarn workspace example dev:h5",
+    "dev:weapp": "yarn workspace example dev:weapp",
     "build": "yarn workspace ui-taro build"
   },
   "engines": {

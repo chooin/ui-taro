@@ -1,5 +1,6 @@
 export default defineAppConfig({
   pages: [
+    'pages/action-sheet/index',
     'pages/button/index',
     'pages/safe-area/index'
   ],
