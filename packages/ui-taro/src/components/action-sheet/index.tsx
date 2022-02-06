@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { match } from 'ts-pattern';
 import { View } from '@tarojs/components';
 import cls from "classnames";
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import { useDelay } from '../../hooks';
 
 type Action = {
   text: string;
@@ -26,30 +26,28 @@ const Modal = NiceModal.create((props: Props): JSX.Element => {
   const modal = useModal();
   const [visible, setVisible] = useState<boolean>(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(modal.visible);
-    })
-  }, [modal.visible])
+  useDelay(() => {
+    setVisible(modal.visible);
+  }, [modal.visible]);
+
+  const onClose = async () => {
+    await modal.hide();
+  }
 
   return (
-    <View className={
-      cls(
-        classPrefix,
-        {
-          [`${classPrefix}--visible`]: visible,
-        }
-      )
-    }>
-      {
-        match(visible)
-          .with(true, () => {
-            return (
-              <View className={`${classPrefix}--wrapper`} onClick={() => modal.hide()}>312321</View>
-            )
-          })
-          .otherwise(() => <></>)
-      }
+    <View
+      onClick={onClose}
+      className={
+        cls(
+          classPrefix,
+          {
+            [`${classPrefix}--visible`]: visible,
+          }
+        )
+      }>
+      <View className={`${classPrefix}--wrapper`}>
+        <View onClick={onClose}>Cancel</View>
+      </View>
     </View>
   );
 });
