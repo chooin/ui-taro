@@ -1,27 +1,5 @@
-import React from 'react';
-import cls from 'classnames';
-import { match } from 'ts-pattern';
-import { View, ViewProps } from '@tarojs/components';
+import { SafeArea } from './safe-area';
 
-interface Props extends ViewProps {
-  position: 'top' | 'bottom'
-}
+export type { SafeAreaProps } from './safe-area';
 
-const classPrefix = 't-safe-area';
-
-const Index: React.FC<Props> = (props) => {
-  return match(props)
-    .with({
-      position: 'top'
-    }, () => {
-      return <View className={cls(`${classPrefix}-top`,)} />
-    })
-    .with({
-      position: 'bottom',
-    }, () => {
-      return <View className={cls(`${classPrefix}-bottom`,)} />
-    })
-    .otherwise(() => <></>);
-};
-
-export default Index;
+export default SafeArea;
