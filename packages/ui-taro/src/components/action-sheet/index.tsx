@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from '@tarojs/components';
 import cls from "classnames";
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { useDelay } from '../../hooks';
+import { useDelayEffect } from '../../hooks';
 
 type Action = {
   text: string;
@@ -26,7 +26,7 @@ const Modal = NiceModal.create((props: Props): JSX.Element => {
   const modal = useModal();
   const [visible, setVisible] = useState<boolean>(false);
 
-  useDelay(() => {
+  useDelayEffect(() => {
     setVisible(modal.visible);
   }, [modal.visible]);
 

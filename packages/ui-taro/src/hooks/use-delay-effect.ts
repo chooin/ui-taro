@@ -1,6 +1,6 @@
 import { useEffect, EffectCallback, DependencyList } from 'react';
 
-function useDelay(effect: EffectCallback, deps: DependencyList = [], delay: number = 100): void {
+function useDelayEffect(effect: EffectCallback, deps: DependencyList = [], delay: number = 100): void {
   useEffect(() => {
     setTimeout(() => {
       effect()
@@ -8,4 +8,4 @@ function useDelay(effect: EffectCallback, deps: DependencyList = [], delay: numb
   }, deps);
 };
 
-export default useDelay;
+export default useDelayEffect;

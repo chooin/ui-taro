@@ -1,1 +1,1 @@
-export { default as useDelay } from './use-delay';
+export { default as useDelayEffect } from './use-delay-effect';
