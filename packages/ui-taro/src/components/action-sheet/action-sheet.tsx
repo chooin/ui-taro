@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View } from '@tarojs/components';
 import cls from "classnames";
 import NiceModal, { useModal } from '@ebay/nice-modal-react';

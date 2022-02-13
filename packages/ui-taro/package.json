@@ -19,5 +19,8 @@
     "@tarojs/components": "^3.4.1",
     "@tarojs/taro": "^3.4.1",
     "react": "^17.0.2"
-  }
+  },
+  "files": [
+    "src"
+  ]
 }

@@ -1,8 +1,17 @@
-@import "../../scss/variables.scss";
-
 .t-button--normalize {
   &::after {
     display: none;
+  }
+}
+
+@keyframes t-button {
+  0% {
+    transform: translate(-50%, -50%)
+    rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%)
+    rotate(360deg);
   }
 }
 
@@ -11,49 +20,85 @@
   position: relative;
   background: #ccc;
   text-align: center;
-  font-size: 32px;
-  padding: 10px 15px;
   cursor: pointer;
   border: none;
   user-select: none;
   text-decoration: none;
   box-sizing: border-box;
   display: inline-block;
-  transition: all 0.3s;
-}
-
-.t-button--block {
-  display: block;
-}
-
-.t-button--small {
-
+  transition: all 0.2s;
+  font-family: $fontFamily;
 }
 
 .t-button--primary,
 .t-button--primary:hover, {
-  background: $primary !important;
-  color: #fff !important;
+  background: $primary;
+  color: #fff;
 }
 
 .t-button--success,
 .t-button--success:hover, {
-  background: $success !important;
-  color: #fff !important;
+  background: $success ;
+  color: #fff;
 }
 
 .t-button--warning,
 .t-button--warning:hover, {
-  background: $warning !important;
-  color: #fff !important;
+  background: $warning;
+  color: #fff;
 }
 
 .t-button--danger,
 .t-button--danger:hover, {
-  background: $danger !important;
-  color: #fff !important;
+  background: $danger;
+  color: #fff;
 }
 
 .t-button:active {
-  opacity: 0.95;
+  opacity: 0.75;
+}
+
+.t-button--block {
+  display: block !important;
+}
+
+.t-button--disabled {
+  opacity: 0.4;
+}
+
+.t-button--size-mini {
+  font-size: 30px;
+  padding: 4px 10px;
+}
+
+.t-button--size-default {
+  font-size: 36px;
+  padding: 7px 15px;
+}
+
+.t-button--shape-rounded {
+  border-radius: 100px;
+}
+
+.t-button--shape-rectangular {
+  border-radius: 0;
+}
+
+.t-button--loading {
+  color: transparent;
+  opacity: 0.4;
+  &::before {
+    animation: t-button 500ms infinite linear;
+    border: 4px solid #fff;
+    border-radius: 100%;
+    border-top-color: transparent !important;
+    content: " ";
+    display: block;
+    height: 32px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+  }
 }

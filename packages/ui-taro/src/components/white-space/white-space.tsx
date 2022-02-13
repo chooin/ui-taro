@@ -1,16 +1,17 @@
 import React from 'react';
-import { View } from "@tarojs/components";
+import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 
 export interface WhiteSpaceProps {
   size: number;
-  backgroundColor: string;
+  backgroundColor?: string;
 }
 
 export const WhiteSpace: React.FC<WhiteSpaceProps> = (props) => {
   return (
     <View
       style={{
-        height: `${props.size}px`,
+        height: Taro.pxTransform(props.size),
         backgroundColor: props.backgroundColor ?? 'transparent',
       }}
     />

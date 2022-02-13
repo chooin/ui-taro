@@ -9,7 +9,9 @@
   "scripts": {
     "dev:h5": "yarn workspace example dev:h5",
     "dev:weapp": "yarn workspace example dev:weapp",
-    "build": "yarn workspace ui-taro build"
+    "build": "yarn workspace ui-taro build",
+    "publish": "yarn workspace ui-taro publish",
+    "link": "cd packages/ui-taro && yarn link && cd -"
   },
   "engines": {
     "node": "16.x"
