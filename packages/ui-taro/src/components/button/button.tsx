@@ -36,12 +36,13 @@ export const Button: React.FC<ButtonProps> = (p) => {
 
   return (
     <Components.Button
+      onClick={onClick}
       className={
         cls(
           classPrefix,
           `${classPrefix}--normalize`,
-          `${classPrefix}--${props.color}`,
-          `${classPrefix}--${props.size}`,
+          `${classPrefix}--color-${props.color}`,
+          `${classPrefix}--size-${props.size}`,
           `${classPrefix}--fill-${props.fill}`,
           `${classPrefix}--shape-${props.shape}`,
           {
