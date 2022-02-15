@@ -1,8 +1,8 @@
 import React from 'react';
 import Taro from '@tarojs/taro';
-import { View } from "@tarojs/components";
+import { View, ViewProps } from "@tarojs/components";
 
-export interface WingBlankProps {
+export interface WingBlankProps extends ViewProps{
   size: number;
   backgroundColor?: string;
 }
@@ -14,6 +14,7 @@ export const WingBlank: React.FC<WingBlankProps> = (props) => {
         padding: `0 ${Taro.pxTransform(props.size)}`,
         backgroundColor: props.backgroundColor ?? 'transparent',
       }}
+      {...props}
     >
       {props.children}
     </View>

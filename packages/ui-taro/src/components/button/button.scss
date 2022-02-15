@@ -1,6 +1,6 @@
 .t-button--normalize {
   display: inline;
-  color: #444;
+  color: $fontColor;
   font-family: $fontFamily;
   box-sizing: border-box;
   transition: all 0.2s;
@@ -89,7 +89,6 @@
 
 .t-button--loading,
 .t-button--loading:hover {
-  color: transparent !important;
   opacity: 0.4;
   cursor: not-allowed;
 

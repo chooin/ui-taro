@@ -1,9 +1,10 @@
 import * as React from 'react';
-import * as Components from '@tarojs/components';
+import { Button as TCButton, ButtonProps as TCButtonProps } from '@tarojs/components';
 import cls from 'classnames';
+import { match } from 'ts-pattern';
 import { mergeProps } from '../../utils';
 
-export interface ButtonProps extends Components.ButtonProps {
+export interface ButtonProps extends TCButtonProps {
   block?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -35,10 +36,11 @@ export const Button: React.FC<ButtonProps> = (p) => {
   }
 
   return (
-    <Components.Button
-      onClick={onClick}
+    <TCButton
+      {...props}
       className={
         cls(
+          props.className,
           classPrefix,
           `${classPrefix}--normalize`,
           `${classPrefix}--color-${props.color}`,
@@ -52,7 +54,17 @@ export const Button: React.FC<ButtonProps> = (p) => {
           },
         )
       }
-      {...props}
-      loading={false}>{props.children}</Components.Button>
+      onClick={onClick}
+      loading={false}>
+      {
+        match(props)
+          .with({ loading: true }, () => <></>)
+          .otherwise(() => {
+            return React.Children.map(props.children, (child) => {
+              return React.isValidElement(child) && React.cloneElement(child)
+            })
+          })
+      }
+    </TCButton>
   )
 }
