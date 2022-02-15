@@ -15,11 +15,11 @@ export const WingBlank: React.FC<WingBlankProps> = (p) => {
 
   return (
     <View
+      {...props}
       style={{
         padding: `0 ${Taro.pxTransform(props.size)}`,
         backgroundColor: props.backgroundColor,
       }}
-      {...props}
     >
       {props.children}
     </View>

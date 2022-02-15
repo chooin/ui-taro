@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Button as TCButton, ButtonProps as TCButtonProps, View } from '@tarojs/components';
+import * as TC from '@tarojs/components';
 import cls from 'classnames';
 import { match } from 'ts-pattern';
 import { mergeProps } from '../../utils';
 
-export interface ButtonProps extends TCButtonProps {
+export interface ButtonProps extends TC.ButtonProps {
   block?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = (p) => {
   }
 
   return (
-    <TCButton
+    <TC.Button
       {...props}
       className={
         cls(
@@ -59,12 +59,12 @@ export const Button: React.FC<ButtonProps> = (p) => {
       {
         match(props)
           .with({ loading: true }, () => {
-            return <View className={`${classPrefix}--hidden`}>{props.children}</View>
+            return <TC.View className={`${classPrefix}--hidden`}>{props.children}</TC.View>
           })
           .otherwise(() => {
             return props.children
           })
       }
-    </TCButton>
+    </TC.Button>
   )
 }

@@ -15,11 +15,11 @@ export const WhiteSpace: React.FC<WhiteSpaceProps> = (p) => {
 
   return (
     <View
+      {...props}
       style={{
         height: Taro.pxTransform(props.size),
         backgroundColor: props.backgroundColor,
       }}
-      {...props}
     />
   );
 };

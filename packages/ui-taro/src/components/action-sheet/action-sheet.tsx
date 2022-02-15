@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from '@tarojs/components';
+import * as TC from '@tarojs/components';
 import cls from "classnames";
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useDelayEffect } from '../../hooks';
@@ -35,7 +35,7 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
   }
 
   return (
-    <View
+    <TC.View
       onClick={onClose}
       className={
         cls(
@@ -45,10 +45,10 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
           }
         )
       }>
-      <View className={`${classPrefix}--wrapper`}>
-        <View onClick={onClose}>Cancel</View>
-      </View>
-    </View>
+      <TC.View className={`${classPrefix}--wrapper`}>
+        <TC.View onClick={onClose}>Cancel</TC.View>
+      </TC.View>
+    </TC.View>
   );
 });
 
