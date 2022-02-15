@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button as TCButton, ButtonProps as TCButtonProps } from '@tarojs/components';
+import { Button as TCButton, ButtonProps as TCButtonProps, View } from '@tarojs/components';
 import cls from 'classnames';
 import { match } from 'ts-pattern';
 import { mergeProps } from '../../utils';
@@ -58,11 +58,11 @@ export const Button: React.FC<ButtonProps> = (p) => {
       loading={false}>
       {
         match(props)
-          .with({ loading: true }, () => <></>)
+          .with({ loading: true }, () => {
+            return <View className={`${classPrefix}--hidden`}>{props.children}</View>
+          })
           .otherwise(() => {
-            return React.Children.map(props.children, (child) => {
-              return React.isValidElement(child) && React.cloneElement(child)
-            })
+            return props.children
           })
       }
     </TCButton>
