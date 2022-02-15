@@ -1,5 +1,6 @@
 import React from 'react';
 import Taro from '@tarojs/taro';
+import { mergeProps } from '../../utils';
 import { View, ViewProps } from "@tarojs/components";
 
 export interface WingBlankProps extends ViewProps{
@@ -7,12 +8,16 @@ export interface WingBlankProps extends ViewProps{
   backgroundColor?: string;
 }
 
-export const WingBlank: React.FC<WingBlankProps> = (props) => {
+export const WingBlank: React.FC<WingBlankProps> = (p) => {
+  const props = mergeProps({
+    backgroundColor: 'transparent',
+  }, p);
+
   return (
     <View
       style={{
         padding: `0 ${Taro.pxTransform(props.size)}`,
-        backgroundColor: props.backgroundColor ?? 'transparent',
+        backgroundColor: props.backgroundColor,
       }}
       {...props}
     >
