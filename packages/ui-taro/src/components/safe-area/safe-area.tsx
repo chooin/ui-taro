@@ -2,6 +2,7 @@ import React from 'react';
 import cls from 'classnames';
 import { match, when } from 'ts-pattern';
 import { View, ViewProps } from '@tarojs/components';
+import { withNativeProps } from "../../utils";
 
 export interface SafeAreaProps extends ViewProps {
   position: 'top' | 'bottom'
@@ -15,13 +16,16 @@ enum Position {
 }
 
 export const SafeArea: React.FC<SafeAreaProps> = (props) => {
-  return match(props)
-    .with({
-      position: when((position: string) => {
-        return position in Position
+  return withNativeProps(
+    props,
+    match(props)
+      .with({
+        position: when((position: string) => {
+          return position in Position
+        })
+      }, ({ position }) => {
+        return <View className={cls(classPrefix, `${classPrefix}-${position}`,)} />
       })
-    }, ({ position }) => {
-      return <View className={cls(`${classPrefix}-${position}`,)} />
-    })
-    .otherwise(() => <></>);
+      .otherwise(() => <></>)
+  );
 };

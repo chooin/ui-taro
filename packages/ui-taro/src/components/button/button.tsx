@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as TC from '@tarojs/components';
 import cls from 'classnames';
 import { match } from 'ts-pattern';
-import { mergeProps } from '../../utils';
+import { mergeProps, withNativeProps } from '../../utils';
+import type { Color } from '../../typings';
 
 export interface ButtonProps extends TC.ButtonProps {
   block?: boolean;
@@ -11,7 +12,7 @@ export interface ButtonProps extends TC.ButtonProps {
   size?: 'mini' | 'default';
   shape?: 'default' | 'rounded' | 'rectangular';
   fill?: 'default' | 'solid' | 'outline';
-  color?: 'default' | 'primary' | 'success' | 'warning' | 'danger';
+  color?: Color;
   onClick?: () => void;
 }
 
@@ -35,12 +36,11 @@ export const Button: React.FC<ButtonProps> = (p) => {
     props.onClick?.();
   }
 
-  return (
+  return withNativeProps(
+    props,
     <TC.Button
-      {...props}
       className={
         cls(
-          props.className,
           classPrefix,
           `${classPrefix}--normalize`,
           `${classPrefix}--color-${props.color}`,

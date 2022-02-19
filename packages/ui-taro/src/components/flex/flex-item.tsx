@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, ViewProps } from '@tarojs/components';
 import { match, __ } from 'ts-pattern';
-import cls from 'classnames';
-import { mergeProps } from '../../utils';
+import {mergeProps, withNativeProps} from '../../utils';
 
 export interface FlexItemProps extends ViewProps {
   flex?: number;
@@ -21,9 +20,9 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
     isLastChild: false,
   }, p);
 
-  return (
+  return withNativeProps(
+    props,
     <View
-      {...props}
       style={{
         flex: props.flex,
         marginLeft: match(props)
@@ -43,7 +42,7 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
           }, ({ gutter }) => gutter)
           .otherwise(() => 0),
       }}
-      className={cls(props.className, classPrefix)}>
+      className={classPrefix}>
       {props.children}
     </View>
   )

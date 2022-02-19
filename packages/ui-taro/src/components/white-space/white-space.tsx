@@ -1,6 +1,6 @@
 import React from 'react';
 import Taro from '@tarojs/taro';
-import { mergeProps } from '../../utils';
+import { mergeProps, withNativeProps } from '../../utils';
 import { View, ViewProps } from '@tarojs/components';
 
 export interface WhiteSpaceProps extends ViewProps {
@@ -13,9 +13,9 @@ export const WhiteSpace: React.FC<WhiteSpaceProps> = (p) => {
     backgroundColor: 'transparent',
   }, p);
 
-  return (
+  return withNativeProps(
+    props,
     <View
-      {...props}
       style={{
         height: Taro.pxTransform(props.size),
         backgroundColor: props.backgroundColor,

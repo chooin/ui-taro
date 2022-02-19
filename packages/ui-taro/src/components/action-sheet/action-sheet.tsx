@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import * as TC from '@tarojs/components';
-import cls from "classnames";
+import cls from 'classnames';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useDelayEffect } from '../../hooks';
+import { withNativeProps } from '../../utils';
 
 type Action = {
+  key: string | number;
   text: string;
-  key: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export type ActionSheetProps = {
   extra?: React.ReactNode;
   actions: Action[];
-  afterClose?: () => void;
   onClose?: () => void;
+  afterClose?: () => void;
   onMaskClick?: () => void;
 };
 
-type Result = {}
+type ActionSheetResult = Required<Action>;
 
 const classPrefix = 't-action-sheet';
 
@@ -34,7 +35,8 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
     await modal.hide();
   }
 
-  return (
+  return withNativeProps(
+    {},
     <TC.View
       onClick={onClose}
       className={
@@ -52,6 +54,9 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
   );
 });
 
-export const show = (props: ActionSheetProps): Promise<Result> => {
-  return NiceModal.show(Modal, props) as Promise<Result>;
+export const show = (props: ActionSheetProps): Promise<ActionSheetResult> => {
+  return NiceModal.show(Modal, {
+    ...props,
+    keepMounted: true,
+  }) as Promise<ActionSheetResult>;
 };

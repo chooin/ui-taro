@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, ViewProps } from '@tarojs/components';
-import cls from 'classnames';
-import { mergeProps } from '../../utils';
+import { mergeProps, withNativeProps } from '../../utils';
 
 export interface FlexProps extends ViewProps {
   gutter: number;
@@ -16,8 +15,9 @@ const Flex: React.FC<FlexProps> = (p) => {
 
   const childrenCount = React.Children.count(props.children);
 
-  return (
-    <View {...props} className={cls(props.className, classPrefix)}>
+  return withNativeProps(
+    props,
+    <View className={classPrefix}>
       {React.Children.map(
         props.children,
         (child: React.ReactNode, index) =>
