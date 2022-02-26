@@ -1,4 +1,5 @@
 import React from 'react';
+import Taro from "@tarojs/taro";
 import { View, ViewProps } from '@tarojs/components';
 import { match, __ } from 'ts-pattern';
 import {mergeProps, withNativeProps} from '../../utils';
@@ -31,7 +32,7 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
           }, () => 0)
           .with({
             gutter: __.number
-          }, ({ gutter }) => gutter)
+          }, ({ gutter }) => Taro.pxTransform(gutter / 2))
           .otherwise(() => 0),
         marginRight: match(props)
           .with({
@@ -39,7 +40,7 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
           }, () => 0)
           .with({
             gutter: __.number
-          }, ({ gutter }) => gutter)
+          }, ({ gutter }) => Taro.pxTransform(gutter / 2))
           .otherwise(() => 0),
       }}
       className={classPrefix}>

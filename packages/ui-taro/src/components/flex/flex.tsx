@@ -3,7 +3,7 @@ import { View, ViewProps } from '@tarojs/components';
 import { mergeProps, withNativeProps } from '../../utils';
 
 export interface FlexProps extends ViewProps {
-  gutter: number;
+  gutter?: number;
 }
 
 const classPrefix = 't-flex';

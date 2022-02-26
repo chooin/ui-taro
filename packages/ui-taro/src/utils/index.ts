@@ -1,4 +1,11 @@
-export { default as device } from './device';
-export * from './merge-props';
-export { default as sleep } from './sleep';
-export { withNativeProps } from './native-props';
+import sleep from './sleep';
+import device from './device';
+import { mergeProps } from './merge-props';
+import { withNativeProps } from './native-props';
+
+export {
+  mergeProps,
+  sleep,
+  withNativeProps,
+  device,
+}

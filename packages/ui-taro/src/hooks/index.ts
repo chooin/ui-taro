@@ -1,1 +1,5 @@
-export { default as useDelayEffect } from './use-delay-effect';
+import { useDelayEffect } from './use-delay-effect';
+
+export {
+  useDelayEffect,
+}

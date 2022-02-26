@@ -13,7 +13,7 @@
   margin: 0;
 
   &::after {
-    display: none;
+    border-width: 0;
   }
 }
 
@@ -67,7 +67,7 @@
 
 .t-button--size {
   &-default {
-    font-size: 36px;
+    font-size: 34px;
     padding: 7px 15px;
   }
 
@@ -120,6 +120,7 @@
     transform-origin: 0 0;
     transform: scale(0.5);
     border: 2px solid #ccc;
+    border-radius: inherit;
   }
 
   &.t-button--color {
