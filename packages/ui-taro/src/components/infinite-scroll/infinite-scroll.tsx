@@ -8,14 +8,14 @@ type LoadMoreElementProps = {
   hasMore: boolean;
   threshold?: number;
   loadMore: () => Promise<void>;
-  refresherRefresh: () => Promise<void>;
+  refresherRefresh?: () => Promise<void>;
 }
 
 export interface InfiniteScrollProps {
   hasMore: boolean;
   threshold?: number;
   loadMore: () => Promise<void>;
-  refresherRefresh: () => Promise<void>;
+  refresherRefresh?: () => Promise<void>;
 }
 
 const classPrefix = 't-infinite-scroll';
@@ -67,7 +67,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = (p) => {
       {
         match(props.hasMore)
           .with(true, () => {
-            return <>加载中</>
+            return <>努力加载中</>
           })
           .otherwise(() => {
             return <>没有更多了</>
