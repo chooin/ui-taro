@@ -13,9 +13,13 @@ const Index: React.FC = () => {
   }
 
   return (
-    <ScrollView scrollY>
-      <InfiniteScroll hasMore={hasMore} loadMore={onLoadMore} />
-    </ScrollView>
+    <InfiniteScroll.Provider>
+      <ScrollView scrollY>
+        <InfiniteScroll hasMore={hasMore} loadMore={onLoadMore}>
+          加载中
+        </InfiniteScroll>
+      </ScrollView>
+    </InfiniteScroll.Provider>
   )
 }
 

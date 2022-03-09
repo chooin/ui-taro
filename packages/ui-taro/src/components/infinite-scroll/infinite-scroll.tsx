@@ -1,103 +1,116 @@
-import React, { useRef, useCallback, useState } from 'react';
-import Taro from '@tarojs/taro';
-import { match, __ } from 'ts-pattern';
-import {View} from '@tarojs/components';
-import { mergeProps } from '../../utils';
+import React, { useEffect, useRef, useState } from 'react';
+import { BaseEventOrigFunction, View } from '@tarojs/components';
+import { match } from 'ts-pattern';
+import { CommonEventFunction } from '@tarojs/components/types/common';
+import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
 
 type LoadMoreElementProps = {
   hasMore: boolean;
   loadMore: () => Promise<void>;
-  refresherRefresh?: () => Promise<void>;
-}
+  refresherRefresh?: () => void;
+};
 
 export interface InfiniteScrollProps {
   hasMore: boolean;
   loadMore: () => Promise<void>;
-  refresherRefresh?: () => Promise<void>;
+  refresherRefresh?: () => void;
 }
 
-const classPrefix = 't-infinite-scroll';
-
-const getLoadMoreComponentProps = (children: React.ReactNode): LoadMoreElementProps | undefined => {
+const getLoadMoreComponentProps = (
+  children: React.ReactNode,
+): LoadMoreElementProps | undefined => {
   for (let node of React.Children.toArray(children)) {
     if (React.isValidElement(node)) {
       if (typeof node.props.hasMore === 'boolean') {
         return node.props;
       }
-      const props: LoadMoreElementProps | undefined = getLoadMoreComponentProps(node.props.children);
+      const props: LoadMoreElementProps | undefined = getLoadMoreComponentProps(
+        node.props.children,
+      );
       if (props) {
         return props;
       }
     }
   }
-}
+};
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = (p) => {
-  const props = mergeProps({
-    threshold: 0,
-  }, p);
+const classPrefix = 't-infinite-scroll';
 
+export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
   return (
-    <View id={classPrefix} className={classPrefix}>
-      {
+    <>
+      {props.children ??
         match(props.hasMore)
           .with(true, () => {
-            return <>努力加载中</>
+            return <View className={classPrefix}>努力加载中</View>;
           })
           .otherwise(() => {
-            return <>没有更多了</>
-          })
-      }
-    </View>
+            return <View className={classPrefix}>没有更多了</View>;
+          })}
+    </>
   );
 };
 
-export function create<P extends {}>(Component: React.FC<P>) {
-  return (props: P) => {
-    const [refresherTriggered, setRefresherTriggered] = useState<boolean>(true);
-    const isLoading = useRef<boolean>(false);
+// @ts-ignore
+export const Provider: React.FC<ScrollViewProps> = (props) => {
+  const loading = useRef<boolean>(false);
+  const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
 
-    if (React.isValidElement(Component)) {
-      if (Component.type !== 'scroll-view') {
-        throw new Error(`You must use <ScrollView /> first`);
-      }
-      const loadMoreProps = getLoadMoreComponentProps(Component);
+  const loadMoreProps = getLoadMoreComponentProps(props.children);
 
-      const onScroll = () => {
-        if (loadMoreProps?.hasMore) {
-          if (isLoading.current) {
-            return;
-          } else {
-            isLoading.current = true;
-          }
-          loadMoreProps.loadMore().then(() => {
-            isLoading.current = false;
-          })
-        }
-      }
+  useEffect(() => {
+    onLoadMore();
+  }, []);
 
-      const onRefresherRefresh = async () => {
-        setRefresherTriggered(true);
-        await loadMoreProps?.refresherRefresh?.()
-        setRefresherTriggered(false);
-      }
+  const onScrollToLower: CommonEventFunction<BaseEventOrigFunction<any>> = (
+    e,
+  ) => {
+    onLoadMore();
+    props.onScrollToLower?.(e);
+  };
 
-      const scrollViewProps = mergeProps(
-        {
-          ...props,
-          ...loadMoreProps,
-        },
-        {
-          refresherEnabled: Boolean(loadMoreProps?.refresherRefresh),
-          refresherTriggered,
-          onRefresherRefresh,
-          onScroll,
-        }
-      );
-
-      return React.cloneElement(Component, scrollViewProps);
+  const onRefresherRefresh: CommonEventFunction<BaseEventOrigFunction<any>> = (
+    e,
+  ) => {
+    if (refresherTriggered) {
+      return;
     } else {
-      return null;
+      setRefresherTriggered(true);
     }
-  }
-}
+    loadMoreProps?.refresherRefresh?.();
+    loadMoreProps?.loadMore().then(() => {
+      setRefresherTriggered(false);
+    });
+    props.onRefresherRefresh?.(e);
+  };
+
+  const onLoadMore = () => {
+    if (loadMoreProps?.hasMore) {
+      if (loading.current) {
+        return;
+      } else {
+        loading.current = true;
+      }
+      loadMoreProps?.loadMore().then(() => {
+        loading.current = false;
+      });
+    }
+  };
+
+  return match(React.isValidElement(props.children))
+    .with(true, () => {
+      return React.Children.map(props.children, (child: React.ReactNode) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, {
+            onScrollToLower,
+            refresherTriggered,
+            refresherEnabled: true,
+            onRefresherRefresh,
+          });
+        } else {
+          return <></>;
+        }
+      });
+    })
+    .otherwise(() => <></>);
+};
