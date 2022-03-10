@@ -1,21 +1,26 @@
 import React from 'react';
-import cls from 'classnames';
+import Taro from '@tarojs/taro';
 import { match, when } from 'ts-pattern';
 import { View, ViewProps } from '@tarojs/components';
-import { withNativeProps } from "../../utils";
+import { useSafeArea } from '../../hooks';
+import { withNativeProps, mergeProps } from "../../utils";
 
 export interface SafeAreaProps extends ViewProps {
   position: 'top' | 'bottom'
+  min?: number;
 }
-
-const classPrefix = 't-safe-area';
 
 enum Position {
   top = 'top',
   bottom = 'bottom',
 }
 
-export const SafeArea: React.FC<SafeAreaProps> = (props) => {
+export const SafeArea: React.FC<SafeAreaProps> = (p) => {
+  const props = mergeProps({
+    min: 0
+  }, p)
+  const safeArea = useSafeArea();
+
   return withNativeProps(
     props,
     match(props)
@@ -23,8 +28,16 @@ export const SafeArea: React.FC<SafeAreaProps> = (props) => {
         position: when((position: string) => {
           return position in Position
         })
-      }, ({ position }) => {
-        return <View className={cls(classPrefix, `${classPrefix}-${position}`,)} />
+      }, () => {
+        return (
+          <View
+            style={{
+              height: Taro.pxTransform(
+                Math.max(props.min, safeArea?.bottom ? safeArea.bottom * 2 : 0),
+              ),
+            }}
+          />
+        )
       })
       .otherwise(() => <></>)
   );
