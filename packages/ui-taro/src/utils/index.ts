@@ -1,11 +1,9 @@
-import sleep from './sleep';
-import device from './device';
 import { mergeProps } from './merge-props';
 import { withNativeProps } from './native-props';
+import sleep from './sleep';
 
 export {
+  withNativeProps,
   mergeProps,
   sleep,
-  withNativeProps,
-  device,
 }

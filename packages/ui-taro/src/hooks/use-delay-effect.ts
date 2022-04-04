@@ -10,4 +10,4 @@ export function useDelayEffect(
       effect()
     }, delay)
   }, deps);
-};
+}

@@ -10,6 +10,8 @@
   cursor: pointer;
   position: relative;
   background: #ccc;
+  border-radius: 6px;
+  border: none;
   margin: 0;
 
   &::after {
@@ -57,7 +59,11 @@
 }
 
 .t-button--block {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .t-button--disabled {

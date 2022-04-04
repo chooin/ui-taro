@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getSystemInfoSync } from '@tarojs/taro';
+import { useMount } from './use-mount';
 
 type Result =
   | {
@@ -13,7 +14,7 @@ type Result =
 export function useSafeArea(): Result {
   const [safeArea, setSafeArea] = useState<Result>();
 
-  useEffect(() => {
+  useMount(() => {
     const systemInfo = getSystemInfoSync();
 
     if (systemInfo.safeArea) {
@@ -24,7 +25,7 @@ export function useSafeArea(): Result {
         bottom: systemInfo.screenHeight - systemInfo.safeArea.bottom,
       });
     }
-  }, []);
+  });
 
   return safeArea;
 }

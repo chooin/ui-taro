@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = (p) => {
   return withNativeProps(
     props,
     <TC.Button
-      {...props /* 别移除: 解决小程序 getPhoneNumber 不执行问题 */}
+      {...props /* ! 别移除: 解决小程序 getPhoneNumber 不执行问题 */}
       className={
         cls(
           classPrefix,
@@ -63,7 +63,11 @@ export const Button: React.FC<ButtonProps> = (p) => {
             return <TC.View className={`${classPrefix}--hidden`}>{props.children}</TC.View>
           })
           .otherwise(() => {
-            return props.children
+            return (
+              <TC.View>
+                {props.children}
+              </TC.View>
+            )
           })
       }
     </TC.Button>
