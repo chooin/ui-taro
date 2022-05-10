@@ -5,7 +5,7 @@ import { match } from 'ts-pattern';
 import { mergeProps, withNativeProps } from '../../utils';
 import type { Color } from '../../typings';
 
-export interface ButtonProps extends TC.ButtonProps {
+export interface IButtonProps extends TC.ButtonProps {
   block?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -18,7 +18,7 @@ export interface ButtonProps extends TC.ButtonProps {
 
 const classPrefix = 't-button'
 
-export const Button: React.FC<ButtonProps> = (p) => {
+export const Button: React.FC<IButtonProps> = (p) => {
   const props = mergeProps({
     block: false,
     loading: false,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as TC from '@tarojs/components';
+import { View } from '@tarojs/components';
 import cls from 'classnames';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useDelayEffect } from '../../hooks';
@@ -11,7 +11,9 @@ type Action = {
   onClick?: () => void;
 }
 
-export type ActionSheetProps = {
+type ActionSheetResult = Omit<Action, 'onClick'>;
+
+export type IActionSheetProps = {
   extra?: React.ReactNode;
   actions: Action[];
   onClose?: () => void;
@@ -19,11 +21,9 @@ export type ActionSheetProps = {
   onMaskClick?: () => void;
 };
 
-type ActionSheetResult = Required<Action>;
-
 const classPrefix = 't-action-sheet';
 
-const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
+const Modal = NiceModal.create((props: IActionSheetProps): JSX.Element => {
   const modal = useModal();
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -37,7 +37,7 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
 
   return withNativeProps(
     {},
-    <TC.View
+    <View
       onClick={onClose}
       className={
         cls(
@@ -47,16 +47,16 @@ const Modal = NiceModal.create((props: ActionSheetProps): JSX.Element => {
           }
         )
       }>
-      <TC.View className={`${classPrefix}--wrapper`}>
-        <TC.View onClick={onClose}>Cancel</TC.View>
-      </TC.View>
-    </TC.View>
+      <View className={`${classPrefix}--wrapper`}>
+        <View onClick={onClose}>Cancel</View>
+      </View>
+    </View>
   );
 });
 
-export const show = (props: ActionSheetProps): Promise<ActionSheetResult> => {
-  return NiceModal.show(Modal, {
+export const show = (props: IActionSheetProps): Promise<ActionSheetResult> => {
+  return NiceModal.show<ActionSheetResult>(Modal, {
     ...props,
     keepMounted: true,
-  }) as Promise<ActionSheetResult>;
+  });
 };

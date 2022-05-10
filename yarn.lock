@@ -1063,10 +1063,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@ebay/nice-modal-react@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmmirror.com/@ebay/nice-modal-react/download/@ebay/nice-modal-react-1.2.0.tgz#c7c3dc6e14d7a95c9bf29860aa69272adb008fa3"
-  integrity sha512-3FY4uPpmrJP6Zfg1yiR89mH0qOcFFp9qFtCNoN720aeMFLnf590zoWqL850yQj87mcofzluHlfjhU+CGfVqcPA==
+"@ebay/nice-modal-react@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@ebay/nice-modal-react/-/nice-modal-react-1.2.5.tgz#780f3ace31f75f26d10db740f36796ec584fb5ec"
+  integrity sha512-aCAbfVnigIfTrng1OOMb/osRWW50+lGAyTPFYZYVORPXvlT2GQPmiikwZYmFUSjTB/YBN43hRoCXF0CLQobyKw==
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
@@ -1211,14 +1211,6 @@
     "@babel/runtime" "^7.14.5"
     "@tarojs/runtime" "3.4.1"
 
-"@tarojs/api@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/api/-/api-3.4.4.tgz#35aafeb3d46de4c3be4240f70bc9c10a219d0dc6"
-  integrity sha512-gQrJssV3yVkk9SdgTGhh6jgMealvj9kZOlk+InfxcwinT6AzOgaL/yrUFQZXJCD1HXK0gz0FLYxinvYi6ApUSw==
-  dependencies:
-    "@babel/runtime" "^7.14.5"
-    "@tarojs/runtime" "3.4.4"
-
 "@tarojs/components@3.4.1":
   version "3.4.1"
   resolved "https://registry.npmmirror.com/@tarojs/components/download/@tarojs/components-3.4.1.tgz#ba5fbe9308b8ea1501688f8a33ef894a76c8372c"
@@ -1226,21 +1218,6 @@
   dependencies:
     "@stencil/core" "2.9.0"
     "@tarojs/taro" "3.4.1"
-    better-scroll "^1.14.1"
-    classnames "^2.2.5"
-    intersection-observer "^0.7.0"
-    omit.js "^1.0.0"
-    resolve-pathname "^3.0.0"
-    swiper "6.8.0"
-    weui "^1.1.2"
-
-"@tarojs/components@^3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/components/-/components-3.4.4.tgz#95cfb4d594088a7d468a1bc932fdd1d44b66976c"
-  integrity sha512-7vyPT7n/H+a9HKNKsBnGo1Nj3hhoPh+mR2m83mxnBiOHx1FIodWVB701kJd63afKvm9U9H5l0a6Y2U/Qc/+cNw==
-  dependencies:
-    "@stencil/core" "2.9.0"
-    "@tarojs/taro" "3.4.4"
     better-scroll "^1.14.1"
     classnames "^2.2.5"
     intersection-observer "^0.7.0"
@@ -1441,18 +1418,6 @@
     universal-router "^8.3.0"
     url-parse "^1.4.7"
 
-"@tarojs/router@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/router/-/router-3.4.4.tgz#369043e4d416f4f4adc4b050a159f4c77030e6f8"
-  integrity sha512-NAuJSu796+5c4aQd+4DOzqfgQTeV7Rd8A6F68/0EE2ndNtxlW5HOb+MH3UqEu6NNLdWEogo5/YPwsyaXmijJzA==
-  dependencies:
-    "@tarojs/runtime" "3.4.4"
-    "@tarojs/taro" "3.4.4"
-    history "^5.1.0"
-    query-string "^6.13.8"
-    universal-router "^8.3.0"
-    url-parse "^1.4.7"
-
 "@tarojs/runner-utils@3.4.1":
   version "3.4.1"
   resolved "https://registry.npmmirror.com/@tarojs/runner-utils/download/@tarojs/runner-utils-3.4.1.tgz#6acd49e4b797286d5ffc7cd4dfd2fd147e07afa4"
@@ -1467,16 +1432,6 @@
   integrity sha512-jPh1P/S6JU9lZyC1KOEJy0sE2QRBpDZKQJqRnOu5nCylZzxaZ2TU1ACmnfuNnUX7/CwWt5f/y+h0mVFpvv9hwA==
   dependencies:
     "@tarojs/shared" "3.4.1"
-    inversify "5.1.1"
-    lodash-es "4.17.15"
-    reflect-metadata "^0.1.13"
-
-"@tarojs/runtime@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/runtime/-/runtime-3.4.4.tgz#3dc6ac35c1531115d4df059650877e3ddd33f2c2"
-  integrity sha512-9mz/kUf8QAe9sETpPzErBF3tiuPSb2eN16O4ljT5V4qbuMbFPHbPdecO3q+UozMsR8Z5+ZikMvNK9RUp+WSbrw==
-  dependencies:
-    "@tarojs/shared" "3.4.4"
     inversify "5.1.1"
     lodash-es "4.17.15"
     reflect-metadata "^0.1.13"
@@ -1501,11 +1456,6 @@
   resolved "https://registry.npmmirror.com/@tarojs/shared/download/@tarojs/shared-3.4.1.tgz#529ff63f52b936573d225856c4f7c6902848592f"
   integrity sha512-X9LBS/TPBRsDjXj9+wynWQepdCY2jcPEJrpKdOL9Z+lEbvRABhnTOUjuaRKIkBJ+lLRg3/Xf8y1Oln+gnajKQQ==
 
-"@tarojs/shared@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/shared/-/shared-3.4.4.tgz#ae47c35b89594d79bb6a51680e240c64dd0c6e3c"
-  integrity sha512-4KV0QHyWNm3obQosUo5kMb3NzhKbcx3kYEq0ZQU4Qp6axXyi/afGZXX5C1sYHm5D6OQ6OPfLkDfH7z6hVRzK3g==
-
 "@tarojs/taro-h5@3.4.1":
   version "3.4.1"
   resolved "https://registry.npmmirror.com/@tarojs/taro-h5/download/@tarojs/taro-h5-3.4.1.tgz#ad6ae7d88eb4afd9548d78d03010edf066a82a6c"
@@ -1515,20 +1465,6 @@
     "@tarojs/router" "3.4.1"
     "@tarojs/runtime" "3.4.1"
     "@tarojs/taro" "3.4.1"
-    base64-js "^1.3.0"
-    jsonp-retry "^1.0.3"
-    mobile-detect "^1.4.2"
-    whatwg-fetch "^3.4.0"
-
-"@tarojs/taro-h5@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/taro-h5/-/taro-h5-3.4.4.tgz#93c09be8defcf9766f202d6d513b0fff9e97caa6"
-  integrity sha512-CvS3aQ51CTKVKkZCI/hdxvjZNOhzSag/llBjmJ8r1FIXBbFvEaYqx+DobMrWYRdWwQvvj97Jz1h8ZAV1FHcEMw==
-  dependencies:
-    "@tarojs/api" "3.4.4"
-    "@tarojs/router" "3.4.4"
-    "@tarojs/runtime" "3.4.4"
-    "@tarojs/taro" "3.4.4"
     base64-js "^1.3.0"
     jsonp-retry "^1.0.3"
     mobile-detect "^1.4.2"
@@ -1551,15 +1487,6 @@
     "@tarojs/api" "3.4.1"
     "@tarojs/runtime" "3.4.1"
     "@tarojs/taro-h5" "3.4.1"
-
-"@tarojs/taro@3.4.4", "@tarojs/taro@^3.4.4":
-  version "3.4.4"
-  resolved "https://registry.npmmirror.com/@tarojs/taro/-/taro-3.4.4.tgz#c9dedee6e9c5036a646c1e9b18db2e949a91e946"
-  integrity sha512-IJg2XgUNvRcs6ba/r32wLIR4Oue7yNOiw/m4wsJ6K52uMR0mu0VWWqxQc7fyOOQ4mHI/uefVaMqbX+wSKJJpVQ==
-  dependencies:
-    "@tarojs/api" "3.4.4"
-    "@tarojs/runtime" "3.4.4"
-    "@tarojs/taro-h5" "3.4.4"
 
 "@tarojs/webpack-runner@3.4.1":
   version "3.4.1"
@@ -1687,7 +1614,7 @@
   resolved "https://registry.npmmirror.com/@types/prop-types/download/@types/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha1-/PcgXCXf95Xuea8eMNosl5CAjxE=
 
-"@types/react@^17.0.2", "@types/react@^17.0.38":
+"@types/react@^17.0.2":
   version "17.0.38"
   resolved "https://registry.npmmirror.com/@types/react/download/@types/react-17.0.38.tgz#f24249fefd89357d5fa71f739a686b8d7c7202bd"
   integrity sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==

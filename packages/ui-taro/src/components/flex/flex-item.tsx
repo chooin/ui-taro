@@ -4,7 +4,7 @@ import { View, ViewProps } from '@tarojs/components';
 import { match, P } from 'ts-pattern';
 import {mergeProps, withNativeProps} from '../../utils';
 
-export interface FlexItemProps extends ViewProps {
+export interface IFlexItemProps extends ViewProps {
   flex?: number;
   gutter?: number;
   isFirstChild?: boolean;
@@ -13,7 +13,7 @@ export interface FlexItemProps extends ViewProps {
 
 const classPrefix = 't-flex-item';
 
-const FlexItem: React.FC<FlexItemProps> = (p) => {
+const FlexItem: React.FC<IFlexItemProps> = (p) => {
   const props = mergeProps({
     flex: 1,
     gutter: 0,

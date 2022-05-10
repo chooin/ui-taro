@@ -3,12 +3,12 @@ import Taro from '@tarojs/taro';
 import { mergeProps, withNativeProps } from '../../utils';
 import { View, ViewProps } from '@tarojs/components';
 
-export interface WhiteSpaceProps extends ViewProps {
+export interface IWhiteSpaceProps extends ViewProps {
   size: number;
   backgroundColor?: string;
 }
 
-export const WhiteSpace: React.FC<WhiteSpaceProps> = (p) => {
+export const WhiteSpace: React.FC<IWhiteSpaceProps> = (p) => {
   const props = mergeProps({
     backgroundColor: 'transparent',
   }, p);

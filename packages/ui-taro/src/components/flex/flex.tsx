@@ -2,13 +2,13 @@ import React from 'react';
 import { View, ViewProps } from '@tarojs/components';
 import { mergeProps, withNativeProps } from '../../utils';
 
-export interface FlexProps extends ViewProps {
+export interface IFlexProps extends ViewProps {
   gutter?: number;
 }
 
 const classPrefix = 't-flex';
 
-const Flex: React.FC<FlexProps> = (p) => {
+const Flex: React.FC<IFlexProps> = (p) => {
   const props = mergeProps({
     gutter: 0,
   }, p);

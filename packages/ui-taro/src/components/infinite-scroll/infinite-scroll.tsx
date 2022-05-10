@@ -10,7 +10,7 @@ type LoadMoreElementProps = {
   refresherRefresh?: () => void;
 };
 
-export interface InfiniteScrollProps {
+export interface IInfiniteScrollProps {
   hasMore: boolean;
   loadMore: () => Promise<void>;
   refresherRefresh?: () => void;
@@ -36,7 +36,7 @@ const getLoadMoreComponentProps = (
 
 const classPrefix = 't-infinite-scroll';
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
+export const InfiniteScroll: React.FC<IInfiniteScrollProps> = (props) => {
   return (
     <>
       {props.children ??

@@ -3,12 +3,12 @@ import Taro from '@tarojs/taro';
 import { mergeProps, withNativeProps } from '../../utils';
 import { View, ViewProps } from "@tarojs/components";
 
-export interface WingBlankProps extends ViewProps{
+export interface IWingBlankProps extends ViewProps{
   size: number;
   backgroundColor?: string;
 }
 
-export const WingBlank: React.FC<WingBlankProps> = (p) => {
+export const WingBlank: React.FC<IWingBlankProps> = (p) => {
   const props = mergeProps({
     backgroundColor: 'transparent',
   }, p);

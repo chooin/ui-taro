@@ -4,11 +4,11 @@ import { useMount } from './use-mount';
 
 type Result =
   | {
-  top: number;
-  left: number;
-  right: number;
-  bottom: number;
-}
+    top: number;
+    left: number;
+    right: number;
+    bottom: number;
+  }
   | undefined;
 
 export function useSafeArea(): Result {

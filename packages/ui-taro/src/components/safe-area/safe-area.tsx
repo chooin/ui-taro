@@ -5,7 +5,7 @@ import { View, ViewProps } from '@tarojs/components';
 import { useSafeArea } from '../../hooks';
 import { withNativeProps, mergeProps } from "../../utils";
 
-export interface SafeAreaProps extends ViewProps {
+export interface ISafeAreaProps extends ViewProps {
   position: 'top' | 'bottom'
   min?: number;
 }
@@ -15,7 +15,7 @@ enum Position {
   bottom = 'bottom',
 }
 
-export const SafeArea: React.FC<SafeAreaProps> = (p) => {
+export const SafeArea: React.FC<ISafeAreaProps> = (p) => {
   const props = mergeProps({
     min: 0
   }, p)
