@@ -1,7 +1,7 @@
 import React from 'react';
 import Taro from "@tarojs/taro";
 import { View, ViewProps } from '@tarojs/components';
-import { match, __ } from 'ts-pattern';
+import { match, P } from 'ts-pattern';
 import {mergeProps, withNativeProps} from '../../utils';
 
 export interface FlexItemProps extends ViewProps {
@@ -31,7 +31,7 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
             isFirstChild: true
           }, () => 0)
           .with({
-            gutter: __.number
+            gutter: P.number
           }, ({ gutter }) => Taro.pxTransform(gutter / 2))
           .otherwise(() => 0),
         marginRight: match(props)
@@ -39,7 +39,7 @@ const FlexItem: React.FC<FlexItemProps> = (p) => {
             isLastChild: true
           }, () => 0)
           .with({
-            gutter: __.number
+            gutter: P.number
           }, ({ gutter }) => Taro.pxTransform(gutter / 2))
           .otherwise(() => 0),
       }}

@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.3.1",
-    "ts-pattern": "^3.3.5"
+    "ts-pattern": "^4.0.2"
   },
   "devDependencies": {
     "@tarojs/components": "^3.4.4",

@@ -1,6 +1,6 @@
 import React from 'react';
 import Taro from '@tarojs/taro';
-import { match, when } from 'ts-pattern';
+import { match, P } from 'ts-pattern';
 import { View, ViewProps } from '@tarojs/components';
 import { useSafeArea } from '../../hooks';
 import { withNativeProps, mergeProps } from "../../utils";
@@ -25,7 +25,7 @@ export const SafeArea: React.FC<SafeAreaProps> = (p) => {
     props,
     match(props)
       .with({
-        position: when((position: string) => {
+        position: P.when((position: string) => {
           return position in Position
         })
       }, () => {
