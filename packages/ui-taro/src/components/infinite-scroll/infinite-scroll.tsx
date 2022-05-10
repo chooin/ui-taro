@@ -16,6 +16,8 @@ export interface IInfiniteScrollProps {
   refresherRefresh?: () => void;
 }
 
+const classPrefix = 't-infinite-scroll';
+
 const getLoadMoreComponentProps = (
   children: React.ReactNode,
 ): LoadMoreElementProps | undefined => {
@@ -34,8 +36,6 @@ const getLoadMoreComponentProps = (
   }
 };
 
-const classPrefix = 't-infinite-scroll';
-
 export const InfiniteScroll: React.FC<IInfiniteScrollProps> = (props) => {
   return (
     <>
@@ -51,7 +51,6 @@ export const InfiniteScroll: React.FC<IInfiniteScrollProps> = (props) => {
   );
 };
 
-// @ts-ignore
 export const Provider: React.FC<ScrollViewProps> = (props) => {
   const loading = useRef<boolean>(false);
   const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
@@ -97,20 +96,26 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
     }
   };
 
-  return match(React.isValidElement(props.children))
-    .with(true, () => {
-      return React.Children.map(props.children, (child: React.ReactNode) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            onScrollToLower,
-            refresherTriggered,
-            refresherEnabled: true,
-            onRefresherRefresh,
-          });
-        } else {
-          return <></>;
-        }
-      });
-    })
-    .otherwise(() => <></>);
+  return (
+    <>
+      {
+        match(React.isValidElement(props.children))
+          .with(true, () => {
+            return React.Children.map(props.children, (child: React.ReactNode) => {
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                  onScrollToLower,
+                  refresherTriggered,
+                  refresherEnabled: true,
+                  onRefresherRefresh,
+                });
+              } else {
+                return <></>;
+              }
+            });
+          })
+          .otherwise(() => <></>)
+      }
+    </>
+  )
 };

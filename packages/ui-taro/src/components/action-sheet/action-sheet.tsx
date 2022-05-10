@@ -23,7 +23,7 @@ export type IActionSheetProps = {
 
 const classPrefix = 't-action-sheet';
 
-const Modal = NiceModal.create((props: IActionSheetProps): JSX.Element => {
+const ActionSheet: React.FC<IActionSheetProps> = (props) => {
   const modal = useModal();
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -52,7 +52,9 @@ const Modal = NiceModal.create((props: IActionSheetProps): JSX.Element => {
       </View>
     </View>
   );
-});
+};
+
+const Modal = NiceModal.create(ActionSheet);
 
 export const show = (props: IActionSheetProps): Promise<ActionSheetResult> => {
   return NiceModal.show<ActionSheetResult>(Modal, {
