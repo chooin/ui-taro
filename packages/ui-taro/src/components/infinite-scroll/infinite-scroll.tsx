@@ -57,9 +57,14 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
 
   const loadMoreProps = getLoadMoreComponentProps(props.children);
 
+  // useMount(() => {
+  //   onLoadMore();
+  // });
+
+  // 确保在内容不足时会自动触发加载事件
   useEffect(() => {
     onLoadMore();
-  }, []);
+  });
 
   const onScrollToLower: CommonEventFunction<BaseEventOrigFunction<any>> = (
     e,
