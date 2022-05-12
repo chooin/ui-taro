@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
-import { match } from 'ts-pattern';
+import { match, P } from 'ts-pattern';
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
 
 type LoadMoreElementProps = {
@@ -43,7 +43,7 @@ const getChildrenCount = (children: React.ReactNode): number => {
     }
   }
   return 0;
-}
+};
 
 export const InfiniteScroll: React.FC<IInfiniteScrollProps> = (props) => {
   return (
@@ -62,15 +62,27 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
   const [scrollViewHeight, setScrollViewHeight] = useState<number>();
 
   const childrenLength = getChildrenCount(props.children);
-  const loadMoreProps = getLoadMoreComponentProps(props.children) as LoadMoreElementProps;
+  const loadMoreProps = getLoadMoreComponentProps(
+    props.children,
+  ) as LoadMoreElementProps;
 
   useEffect(() => {
     Taro.nextTick(() => {
       Taro.createSelectorQuery()
         .select(`#${classPrefix}--scroll-view`)
-        .boundingClientRect((res: Taro.NodesRef.BoundingClientRectCallbackResult) => {
-          setScrollViewHeight(res.height);
-        }).exec();
+        .boundingClientRect()
+        .exec(
+          (
+            res: Taro.NodesRef.BoundingClientRectCallbackResult[],
+          ) => {
+            const height = match(res)
+              .with([P.select()], (r) => r.height)
+              .otherwise(() => 0);
+            if (height) {
+              setScrollViewHeight(height);
+            }
+          },
+        );
     });
   }, [childrenLength]);
 
@@ -79,15 +91,23 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
       Taro.nextTick(() => {
         Taro.createSelectorQuery()
           .select(`#${classPrefix}--load-more`)
-          .boundingClientRect((res: Taro.NodesRef.BoundingClientRectCallbackResult) => {
-            if (res.top < scrollViewHeight) {
-              onLoadMore();
-              setRefresherTriggered(false);
-            }
-          }).exec();
+          .boundingClientRect()
+          .exec(
+            (
+              res: Taro.NodesRef.BoundingClientRectCallbackResult[],
+            ) => {
+              const top = match(res)
+                .with([P.select()], (r) => r.top)
+                .otherwise(() => 0);
+              if (top < scrollViewHeight) {
+                onLoadMore();
+                setRefresherTriggered(false);
+              }
+            },
+          );
       });
     }
-  }, [scrollViewHeight, childrenLength])
+  }, [scrollViewHeight, childrenLength]);
 
   const onScrollToLower = () => {
     onLoadMore();
@@ -128,7 +148,8 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
                   scrollY: true,
                   onScrollToLower,
                   refresherTriggered,
-                  refresherEnabled: typeof loadMoreProps.refresherRefresh === 'function',
+                  refresherEnabled:
+                    typeof loadMoreProps.refresherRefresh === 'function',
                   onRefresherRefresh,
                 });
               } else {

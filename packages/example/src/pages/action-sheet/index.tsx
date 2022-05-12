@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { ActionSheet, withProvider } from '@/../ui-taro/src/index';
+import { ActionSheet, withProvider } from 'ui-taro/src/index';
 
 const Index: React.FC = () => {
   const onClick = () => {
