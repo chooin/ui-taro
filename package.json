@@ -7,12 +7,11 @@
   "author": "Devin <chooin@126.com>",
   "license": "MIT",
   "scripts": {
-    "preinstall": "node scripts/check-pnpm.js",
-    "dev:h5": "yarn workspace example dev:h5",
-    "dev:weapp": "yarn workspace example dev:weapp",
-    "build": "yarn workspace ui-taro build",
-    "publish": "yarn workspace ui-taro publish",
-    "link": "cd packages/ui-taro && yarn link && cd -"
+    "preinstall": "npx only-allow pnpm",
+    "dev:h5": "pnpm -r --filter 'packages/example' dev:h5",
+    "dev:weapp": "pnpm -r --filter 'packages/example' dev:weapp",
+    "build": "pnpm -r --filter 'packages/ui-taro' build",
+    "publish": "pnpm -r --filter 'packages/ui-taro' publish"
   },
   "engines": {
     "node": "16.x"
