@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BaseEventOrigFunction, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+import { View } from '@tarojs/components';
 import { match } from 'ts-pattern';
-import { CommonEventFunction } from '@tarojs/components/types/common';
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
 
 type LoadMoreElementProps = {
@@ -36,66 +36,80 @@ const getLoadMoreComponentProps = (
   }
 };
 
+const getChildrenCount = (children: React.ReactNode): number => {
+  if (React.isValidElement(children)) {
+    if (React.isValidElement(children.props.children)) {
+      return React.Children.count(children.props.children.props.children);
+    }
+  }
+  return 0;
+}
+
 export const InfiniteScroll: React.FC<IInfiniteScrollProps> = (props) => {
   return (
-    <>
+    <View className={classPrefix} id={`${classPrefix}--load-more`}>
       {props.children ??
         match(props.hasMore)
-          .with(true, () => {
-            return <View className={classPrefix}>努力加载中</View>;
-          })
-          .otherwise(() => {
-            return <View className={classPrefix}>没有更多了</View>;
-          })}
-    </>
+          .with(true, () => '努力加载中')
+          .otherwise(() => '没有更多了')}
+    </View>
   );
 };
 
 export const Provider: React.FC<ScrollViewProps> = (props) => {
   const loading = useRef<boolean>(false);
   const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
+  const [scrollViewHeight, setScrollViewHeight] = useState<number>();
 
-  const loadMoreProps = getLoadMoreComponentProps(props.children);
+  const childrenLength = getChildrenCount(props.children);
+  const loadMoreProps = getLoadMoreComponentProps(props.children) as LoadMoreElementProps;
 
-  // useMount(() => {
-  //   onLoadMore();
-  // });
-
-  // 确保在内容不足时会自动触发加载事件
   useEffect(() => {
-    onLoadMore();
-  });
+    Taro.nextTick(() => {
+      Taro.createSelectorQuery()
+        .select(`#${classPrefix}--scroll-view`)
+        .boundingClientRect((res: Taro.NodesRef.BoundingClientRectCallbackResult) => {
+          setScrollViewHeight(res.height);
+        }).exec();
+    });
+  }, [childrenLength]);
 
-  const onScrollToLower: CommonEventFunction<BaseEventOrigFunction<any>> = (
-    e,
-  ) => {
+  useEffect(() => {
+    if (scrollViewHeight) {
+      Taro.nextTick(() => {
+        Taro.createSelectorQuery()
+          .select(`#${classPrefix}--load-more`)
+          .boundingClientRect((res: Taro.NodesRef.BoundingClientRectCallbackResult) => {
+            if (res.top < scrollViewHeight) {
+              onLoadMore();
+              setRefresherTriggered(false);
+            }
+          }).exec();
+      });
+    }
+  }, [scrollViewHeight, childrenLength])
+
+  const onScrollToLower = () => {
     onLoadMore();
-    props.onScrollToLower?.(e);
   };
 
-  const onRefresherRefresh: CommonEventFunction<BaseEventOrigFunction<any>> = (
-    e,
-  ) => {
+  const onRefresherRefresh = () => {
     if (refresherTriggered) {
       return;
     } else {
       setRefresherTriggered(true);
     }
-    loadMoreProps?.refresherRefresh?.();
-    loadMoreProps?.loadMore().then(() => {
-      setRefresherTriggered(false);
-    });
-    props.onRefresherRefresh?.(e);
+    loadMoreProps.refresherRefresh?.();
   };
 
   const onLoadMore = () => {
-    if (loadMoreProps?.hasMore) {
+    if (loadMoreProps.hasMore) {
       if (loading.current) {
         return;
       } else {
         loading.current = true;
       }
-      loadMoreProps?.loadMore().then(() => {
+      loadMoreProps.loadMore().then(() => {
         loading.current = false;
       });
     }
@@ -103,24 +117,29 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
 
   return (
     <>
-      {
-        match(React.isValidElement(props.children))
-          .with(true, () => {
-            return React.Children.map(props.children, (child: React.ReactNode) => {
+      {match(React.isValidElement(props.children))
+        .with(true, () => {
+          return React.Children.map(
+            props.children,
+            (child: React.ReactNode) => {
               if (React.isValidElement(child)) {
                 return React.cloneElement(child, {
+                  id: `${classPrefix}--scroll-view`,
+                  scrollY: true,
                   onScrollToLower,
                   refresherTriggered,
-                  refresherEnabled: true,
+                  refresherEnabled: typeof loadMoreProps.refresherRefresh === 'function',
                   onRefresherRefresh,
                 });
               } else {
                 return <></>;
               }
-            });
-          })
-          .otherwise(() => <></>)
-      }
+            },
+          );
+        })
+        .otherwise(() => (
+          <></>
+        ))}
     </>
-  )
+  );
 };
