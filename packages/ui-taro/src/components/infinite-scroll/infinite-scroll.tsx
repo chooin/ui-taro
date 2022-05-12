@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
-import { match, P } from 'ts-pattern';
+import { match } from 'ts-pattern';
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
 
 type LoadMoreElementProps = {
@@ -71,18 +71,12 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
       Taro.createSelectorQuery()
         .select(`#${classPrefix}--scroll-view`)
         .boundingClientRect()
-        .exec(
-          (
-            res: Taro.NodesRef.BoundingClientRectCallbackResult[],
-          ) => {
-            const height = match(res)
-              .with([P.select()], (r) => r.height)
-              .otherwise(() => 0);
-            if (height) {
-              setScrollViewHeight(height);
-            }
-          },
-        );
+        .exec((res: Taro.NodesRef.BoundingClientRectCallbackResult[]) => {
+          const height = res?.[0].height ?? 0;
+          if (height) {
+            setScrollViewHeight(height);
+          }
+        });
     });
   }, [childrenLength]);
 
@@ -92,19 +86,13 @@ export const Provider: React.FC<ScrollViewProps> = (props) => {
         Taro.createSelectorQuery()
           .select(`#${classPrefix}--load-more`)
           .boundingClientRect()
-          .exec(
-            (
-              res: Taro.NodesRef.BoundingClientRectCallbackResult[],
-            ) => {
-              const top = match(res)
-                .with([P.select()], (r) => r.top)
-                .otherwise(() => 0);
-              if (top < scrollViewHeight) {
-                onLoadMore();
-                setRefresherTriggered(false);
-              }
-            },
-          );
+          .exec((res: Taro.NodesRef.BoundingClientRectCallbackResult[]) => {
+            const top = res?.[0].top ?? 0;
+            if (top < scrollViewHeight) {
+              onLoadMore();
+              setRefresherTriggered(false);
+            }
+          });
       });
     }
   }, [scrollViewHeight, childrenLength]);
